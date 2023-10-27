@@ -13,6 +13,13 @@ public class Library implements Serializable{
 	
 	public Library() {
 	}
+	
+	public Library(Long id, String name, String session, Integer year_of_publication) {
+		this.id = id;
+		this.name = name;
+		this.session = session;
+		this.year_of_publication = year_of_publication;
+	}
 
 	public Long getId() {
 		return id;
