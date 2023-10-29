@@ -12,9 +12,12 @@ public class Program {
 		
 		LibraryDao libraryDao = DaoManager.createLibraryDao();
 		
-		System.out.println("=== TEST 1 : INSERT ===");
+		System.out.println("\n=== TEST 1 : INSERT ===");
 		Library newBook = new Library(null, "C# .NET", "Tech", 2018);
 		libraryDao.insert(newBook);
+		
+		
+		System.out.println("\n=== TEST 2 : DELETE ===");
 		
 	}
 }

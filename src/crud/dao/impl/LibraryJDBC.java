@@ -53,13 +53,28 @@ public class LibraryJDBC implements LibraryDao{
 		finally {
 			DataBase.closeStatement(st);
 		}
-		
 	}
 
 	@Override
 	public void update(Library library) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(
+					"update library "
+					+ "set name = ? "
+					+ "where id = ?");
+			
+			ps.setString(1, library.getName());
+			ps.setLong(2, library.getId());
+			
+			ps.executeUpdate();
+		}
+		catch(SQLException e) {
+			throw new DataBaseException(e.getMessage());
+		}
+		finally {
+			DataBase.closeConnection();
+		}
 	}
 
 	@Override
