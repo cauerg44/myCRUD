@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Library implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Integer id;
 	private String name;
 	private String session;
 	private Integer year_of_publication;
@@ -14,18 +14,18 @@ public class Library implements Serializable{
 	public Library() {
 	}
 	
-	public Library(Long id, String name, String session, Integer year_of_publication) {
+	public Library(Integer id, String name, String session, Integer year_of_publication) {
 		this.id = id;
 		this.name = name;
 		this.session = session;
 		this.year_of_publication = year_of_publication;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

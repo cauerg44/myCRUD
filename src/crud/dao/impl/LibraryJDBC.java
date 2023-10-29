@@ -38,7 +38,7 @@ public class LibraryJDBC implements LibraryDao{
 			if(rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
 				if(rs.next()) {
-					long id = rs.getInt(1);
+					int id = rs.getInt(1);
 					library.setId(id);
 				}
 				DataBase.closeResultSet(rs);
@@ -65,7 +65,7 @@ public class LibraryJDBC implements LibraryDao{
 					+ "where id = ?");
 			
 			ps.setString(1, library.getName());
-			ps.setLong(2, library.getId());
+			ps.setInt(2, library.getId());
 			
 			ps.executeUpdate();
 		}
@@ -73,14 +73,28 @@ public class LibraryJDBC implements LibraryDao{
 			throw new DataBaseException(e.getMessage());
 		}
 		finally {
-			DataBase.closeConnection();
+			DataBase.closeStatement(ps);
 		}
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(
+					"delete from library "
+					+ "where id = ?");
+			
+			ps.setInt(1, id);
+			
+			ps.executeUpdate();
+		}
+		catch(SQLException e) {
+			throw new DataBaseException(e.getMessage());
+		}
+		finally {
+			DataBase.closeStatement(ps);
+		}
 	}
 
 	@Override
