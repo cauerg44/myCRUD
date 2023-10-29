@@ -99,8 +99,36 @@ public class LibraryJDBC implements LibraryDao{
 
 	@Override
 	public Library findbyId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(
+					"select * from library where id = ?");
+			
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Library lib = instantiateLibrary(rs);
+				return lib;
+			}
+			return null;
+		}
+		catch(SQLException e) {
+			throw new DataBaseException(e.getMessage());
+		}
+		finally {
+			DataBase.closeStatement(ps);
+			DataBase.closeResultSet(rs);
+		}
+	}
+
+	private Library instantiateLibrary(ResultSet rs) throws SQLException {
+		Library library = new Library();
+		library.setId(rs.getInt("id"));
+		library.setName(rs.getString("name"));
+		library.setSession(rs.getString("session"));
+		library.setYear_of_publication(rs.getInt("year_of_publication"));
+		return library;
 	}
 
 	@Override
