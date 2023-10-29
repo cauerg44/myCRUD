@@ -1,11 +1,13 @@
 package app;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import crud.dao.DaoManager;
 import crud.dao.LibraryDao;
 import entities.Library;
+import model.entities.Department;
 
 public class Program {
 
@@ -15,11 +17,9 @@ public class Program {
 		
 		LibraryDao libraryDao = DaoManager.createLibraryDao();
 		
-		System.out.println("\n=== TEST 1: findById ===");
-		System.out.println("Enter id for search: ");
-		int idSearch = sc.nextInt();
-		Library lib = libraryDao.findbyId(idSearch);
-		System.out.println(lib);
+		System.out.println("\n=== TEST 2: findAll ===");
+		List<Library> libs = libraryDao.findAll();
+		libs.forEach(System.out::println);
 		
 	}
 }

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import crud.dao.LibraryDao;
@@ -133,8 +134,28 @@ public class LibraryJDBC implements LibraryDao{
 
 	@Override
 	public List<Library> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(
+					"select * from library");
+			
+			rs = ps.executeQuery();
+			
+			List<Library> libs = new ArrayList<>();
+			while(rs.next()) {
+				Library lib = instantiateLibrary(rs);
+				libs.add(lib);
+			}
+			return libs;
+		}
+		catch(SQLException e) {
+			throw new DataBaseException(e.getMessage());
+		}
+		finally {
+			DataBase.closeStatement(ps);
+			DataBase.closeResultSet(rs);
+		}
 	}
 
 }
