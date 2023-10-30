@@ -41,6 +41,7 @@ public class Program {
 				Library newRecord = new Library(null, name, session, yearPublished);
 				libraryDao.insert(newRecord);
 				System.out.println("New record inserted! Id: " + newRecord.getId());
+				break;
 			case 2:
 				System.out.print("Enter id for update: ");
 				int idForUpdate = sc.nextInt();
@@ -68,12 +69,26 @@ public class Program {
 				System.out.println();
 				List<Library> libCollection = libraryDao.findAll();
 				libCollection.forEach(System.out::println);
+				break;
 			case 4:
 				System.out.print("Enter id: ");
 				int idForSearch = sc.nextInt();
 				Library idFound = libraryDao.findbyId(idForSearch);
+				System.out.println();
+				System.out.println("RESULT: ");
 				System.out.println(idFound);
+				break;
+			case 5:
+				System.out.print("Enter id for delete: ");
+				int idForDelete = sc.nextInt();
+				libraryDao.deleteById(idForDelete);
+				System.out.println("Sucessfully! ");
+				break;
+			case 6:
+				default:
+				System.out.println("Terminated program...");
 			}
 		} while (choice != 6);
+		sc.close();
 	}
 }
