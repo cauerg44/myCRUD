@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import crud.dao.DaoManager;
 import crud.dao.LibraryDao;
+import entities.Library;
 
 public class Program {
 
@@ -28,7 +29,39 @@ public class Program {
 			
 			switch(choice) {
 			case 1:
+				System.out.print("Name: ");
+				sc.nextLine();
+				String name = sc.nextLine();
+				System.out.print("Session: ");
+				String session = sc.nextLine();
+				System.out.print("Year published: ");
+				Integer yearPublished = sc.nextInt();
 				
+				Library newRecord = new Library(null, name, session, yearPublished);
+				libraryDao.insert(newRecord);
+				System.out.println("New record inserted! Id: " + newRecord.getId());
+			case 2:
+				System.out.print("Enter id for update: ");
+				int idForUpdate = sc.nextInt();
+				Library libUp = libraryDao.findbyId(idForUpdate);
+				System.out.print("Would you like to update name or session? (n/s): ");
+				char resp = sc.next().charAt(0);
+				sc.nextLine();
+				if(resp == 'n') {
+					System.out.print("Set name to update: ");
+					libUp.setName(sc.nextLine());
+					libraryDao.update(libUp);
+					System.out.println("Update completed");
+					break;
+				} else if (resp == 's') {
+					System.out.print("Set session to update: ");
+					libUp.setSession(sc.nextLine());
+					libraryDao.update(libUp);
+					System.out.println("Update completed!");
+					break;
+				} else {
+					return;
+				}
 			}
 		} while (choice != 6);
 	}
