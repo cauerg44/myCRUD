@@ -68,6 +68,11 @@ public class Program {
 				System.out.println();
 				List<Library> libCollection = libraryDao.findAll();
 				libCollection.forEach(System.out::println);
+			case 4:
+				System.out.print("Enter id: ");
+				int idForSearch = sc.nextInt();
+				Library idFound = libraryDao.findbyId(idForSearch);
+				System.out.println(idFound);
 			}
 		} while (choice != 6);
 	}
