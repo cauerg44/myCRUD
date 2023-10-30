@@ -1,5 +1,6 @@
 package app;
 
+import java.util.List;
 import java.util.Scanner;
 
 import crud.dao.DaoManager;
@@ -62,6 +63,11 @@ public class Program {
 				} else {
 					return;
 				}
+			case 3:
+				System.out.println("LIBRARY COLLECTION: ");
+				System.out.println();
+				List<Library> libCollection = libraryDao.findAll();
+				libCollection.forEach(System.out::println);
 			}
 		} while (choice != 6);
 	}

@@ -72,7 +72,11 @@ public class Library implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Library [id=" + id + ", name=" + name + ", session=" + session + ", year_of_publication="
-				+ year_of_publication + "]";
+		StringBuilder sb = new StringBuilder();
+		sb.append("Id: " + id + "\n");
+		sb.append("Name: " + name + "\n");
+		sb.append("Session: " + session + "\n");
+		sb.append("Year published: " + year_of_publication + "\n");
+		return sb.toString();
 	}
 }
